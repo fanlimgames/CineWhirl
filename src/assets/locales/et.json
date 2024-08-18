@@ -1,6 +1,6 @@
 {
     "about": {
-        "description": "sudo-flix on veebirakendus, mis otsib internetti striimide jaoks. Meie eesmärk on enamasti minimalistlik lähenemine sisu tarbimisele.",
+        "description": "cinewhirl on veebirakendus, mis otsib internetti striimide jaoks. Meie eesmärk on enamasti minimalistlik lähenemine sisu tarbimisele.",
         "faqTitle": "Tihti küsitud küsimused",
         "q1": {
             "body": "sudo-flix ei hoiusta enda sisu. Kui klõpsate, et midagi vaadata, otsitakse valitud meediat internetist (laadimisekraanil ja vahekaardil \"videoallikad\" näete, millist allikat te kasutate). Meediat ei lae sudo-flix kunagi üles, kõik toimub selle otsingumehhanismi kaudu.",
