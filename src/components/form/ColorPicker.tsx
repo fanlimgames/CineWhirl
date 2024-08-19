@@ -18,13 +18,7 @@ const predefinedColors = [
 ];
 export const initialColor = predefinedColors[0];
 
-export function ColorPicker({
-  label,
-  value,
-  onInput,
-  customIconColor,
-  onIconColorChange,
-}: {
+export function ColorPicker(props: {
   label: string;
   value: string;
   onInput: (v: string) => void;
@@ -35,15 +29,15 @@ export function ColorPicker({
   const [customColor, setCustomColor] = useState<string>("#000000");
 
   const addCustomColor = () => {
-    if (!colors.includes(customColor)) {
-      setColors([...colors, customColor]);
-      onInput(customColor);
-    }
+    setColors([...colors, customColor]);
+    props.onInput(customColor);
   };
 
   return (
     <div className="space-y-3">
-      {label && <p className="font-bold text-white">{label}</p>}
+      {props.label ? (
+        <p className="font-bold text-white">{props.label}</p>
+      ) : null}
 
       {/* Predefined Colors Section */}
       <div className="space-y-2">
@@ -51,20 +45,17 @@ export function ColorPicker({
         <div className="flex gap-3 flex-wrap">
           {colors.map((color) => (
             <button
-              type="button"
+              type="button" // Explicit type attribute
               tabIndex={0}
               className={classNames(
-                "w-10 h-10 rounded-full flex justify-center items-center border-2 transition-all duration-200",
-                value === color ? "border-white" : "border-transparent",
-                "hover:border-gray-400",
+                "w-10 h-10 rounded flex justify-center items-center text-white pointer border-2 border-opacity-10 cursor-pointer",
+                props.value === color ? "border-white" : "border-transparent",
               )}
+              onClick={() => props.onInput(color)}
               style={{ backgroundColor: color }}
-              onClick={() => onInput(color)}
               key={color}
             >
-              {value === color && (
-                <Icon icon={Icons.CHECKMARK} className="text-white" />
-              )}
+              {props.value === color ? <Icon icon={Icons.CHECKMARK} /> : null}
             </button>
           ))}
         </div>
@@ -76,22 +67,23 @@ export function ColorPicker({
         <div className="flex gap-3 flex-wrap">
           {colors.map((color) => (
             <button
-              type="button"
+              type="button" // Explicit type attribute
               tabIndex={0}
               className={classNames(
-                "w-10 h-10 rounded-full flex justify-center items-center border-2 transition-all duration-200",
-                customIconColor === color
+                "w-10 h-10 rounded flex justify-center items-center text-white pointer border-2 border-opacity-10 cursor-pointer",
+                props.customIconColor === color
                   ? "border-white"
                   : "border-transparent",
-                "hover:border-gray-400",
               )}
+              onClick={() =>
+                props.onIconColorChange && props.onIconColorChange(color)
+              }
               style={{ backgroundColor: color }}
-              onClick={() => onIconColorChange?.(color)}
               key={color}
             >
-              {customIconColor === color && (
-                <Icon icon={Icons.CHECKMARK} className="text-white" />
-              )}
+              {props.customIconColor === color ? (
+                <Icon icon={Icons.CHECKMARK} />
+              ) : null}
             </button>
           ))}
           <div className="flex items-center gap-3">
@@ -99,11 +91,11 @@ export function ColorPicker({
               type="color"
               value={customColor}
               onChange={(e) => setCustomColor(e.target.value)}
-              className="w-10 h-10 rounded-full border-2 border-gray-400 cursor-pointer"
+              className="w-10 h-10 rounded border-2 border-gray-300 cursor-pointer"
             />
             <button
-              type="button"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded transition-all duration-200"
+              type="button" // Explicit type attribute
+              className="bg-blue-500 text-white px-4 py-2 rounded"
               onClick={addCustomColor}
             >
               Add Custom Color
