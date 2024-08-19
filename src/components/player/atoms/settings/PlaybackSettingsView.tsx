@@ -71,18 +71,18 @@ export function PlaybackSettingsView({ id }: PlaybackSettingsViewProps) {
                 onMouseLeave={handleSliderMouseLeave}
                 className={classNames(
                   "w-full h-2 rounded-lg",
-                  "bg-gray-300", // Slider track color
-                  "accent-theme", // Use your theme's accent color for the slider thumb
+                  "bg-progress-background bg-opacity-25",
+                  "accent-theme",
                 )}
                 style={{
-                  background: `linear-gradient(to right, var(--accent-color) ${((playbackRate - minPlaybackSpeed) / (maxPlaybackSpeed - minPlaybackSpeed)) * 100}%, #ddd ${((playbackRate - minPlaybackSpeed) / (maxPlaybackSpeed - minPlaybackSpeed)) * 100}%)`,
+                  background: `linear-gradient(to right, var(--accent-color) ${((playbackRate - minPlaybackSpeed) / (maxPlaybackSpeed - minPlaybackSpeed)) * 100}%, var(--background-color) ${((playbackRate - minPlaybackSpeed) / (maxPlaybackSpeed - minPlaybackSpeed)) * 100}%)`,
                 }}
               />
               {hoveredValue !== null && (
                 <div
                   className={classNames(
                     "absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs px-2 py-1 rounded-lg",
-                    "bg-gray-800 text-white", // Tooltip background and text color
+                    "bg-tooltip-background text-tooltip-text",
                   )}
                   style={{
                     left: `${((hoveredValue - minPlaybackSpeed) / (maxPlaybackSpeed - minPlaybackSpeed)) * 100}%`,
