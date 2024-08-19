@@ -19,7 +19,7 @@ import { CaptionSettingsView } from "./settings/CaptionSettingsView";
 import { CaptionsView } from "./settings/CaptionsView";
 import { DownloadRoutes } from "./settings/Downloads";
 import { OpenSubtitlesCaptionView } from "./settings/OpensubtitlesCaptionsView";
-import { PlaybackSpeed } from "./settings/PlaybackSpeed";
+import { PlaybackSettingsView } from "./settings/PlaybackSettingsView";
 import { QualityView } from "./settings/QualityView";
 import { SettingsMenu } from "./settings/SettingsMenu";
 import SourceCaptionsView from "./settings/SourceCaptionsView";
@@ -130,7 +130,7 @@ function SettingsOverlay({ id }: { id: string }) {
         </OverlayPage>
         <OverlayPage id={id} path="/playback" width={343} height={215}>
           <Menu.Card>
-            <PlaybackSpeed id={id} />
+            <PlaybackSettingsView id={id} />
           </Menu.Card>
         </OverlayPage>
         <DownloadRoutes id={id} />
