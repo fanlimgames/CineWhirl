@@ -44,7 +44,7 @@ dependencies:
     version: 0.7.2(react-dom@18.3.1)(react@18.3.1)
   '@movie-web/providers':
     specifier: github:fanlimgames/cinewhirl.com-scraper
-    version: github.com/fanlimgames/cinewhirl.com-scraper/63c02cc297960126a5441dd4c08bf0bce0c5e91a
+    version: github.com/fanlimgames/cinewhirl.com-scraper/16cf22e9d01d4ab208bb3e45cd0585be11319776
   '@mui/material':
     specifier: ^5.16.7
     version: 5.16.7(@emotion/react@11.13.0)(@emotion/styled@11.13.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -11693,8 +11693,8 @@ packages:
       use-sync-external-store: 1.2.2(react@18.3.1)
     dev: false
 
-  github.com/fanlimgames/cinewhirl.com-scraper/63c02cc297960126a5441dd4c08bf0bce0c5e91a:
-    resolution: {tarball: https://codeload.github.com/fanlimgames/cinewhirl.com-scraper/tar.gz/63c02cc297960126a5441dd4c08bf0bce0c5e91a}
+  github.com/fanlimgames/cinewhirl.com-scraper/16cf22e9d01d4ab208bb3e45cd0585be11319776:
+    resolution: {tarball: https://codeload.github.com/fanlimgames/cinewhirl.com-scraper/tar.gz/16cf22e9d01d4ab208bb3e45cd0585be11319776}
     name: '@movie-web/providers'
     version: 2.3.0
     requiresBuild: true
