@@ -62,6 +62,7 @@ function MediaCardContent({
   }
 
   const [searchQuery] = useSearchQuery();
+  const { isMobile } = useIsMobile();
 
   return (
     <Flare.Base
@@ -96,9 +97,11 @@ function MediaCardContent({
           }}
         >
           {/* Bookmark Button */}
-          <div className="absolute top-2 left-2 z-10">
-            <MediaBookmarkButton media={media} />
-          </div>
+          {(isMobile || searchQuery.length > 0) && (
+            <div className="absolute top-2 left-2 z-10">
+              <MediaBookmarkButton media={media} />
+            </div>
+          )}
 
           {/* Series Badge */}
           {series && (
