@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { mediaItemToId } from "@/backend/metadata/tmdb";
 import { DotList } from "@/components/text/DotList";
 import { Flare } from "@/components/utils/Flare";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { useSearchQuery } from "@/hooks/useSearchQuery";
 import { MediaItem } from "@/utils/mediaTypes";
 
@@ -35,8 +36,7 @@ function checkReleased(media: MediaItem): boolean {
     media.release_date && media.release_date <= new Date(),
   );
 
-  const isReleased = media.release_date ? isReleasedDate : isReleasedYear;
-  return isReleased;
+  return media.release_date ? isReleasedDate : isReleasedYear;
 }
 
 function MediaCardContent({
@@ -53,18 +53,16 @@ function MediaCardContent({
   const isReleased = useCallback(() => checkReleased(media), [media]);
 
   const canLink = linkable && !closable && isReleased();
-
   const dotListContent = [t(`media.types.${media.type}`)];
-
-  const [searchQuery] = useSearchQuery();
-
   if (media.year) {
     dotListContent.push(media.year.toFixed());
   }
-
   if (!isReleased()) {
     dotListContent.push(t("media.unreleased"));
   }
+
+  const [searchQuery] = useSearchQuery();
+  const { isMobile } = useIsMobile();
 
   return (
     <Flare.Base
@@ -98,8 +96,8 @@ function MediaCardContent({
             backgroundImage: media.poster ? `url(${media.poster})` : undefined,
           }}
         >
-          {/* Bookmark Button in the top-left corner */}
-          {canLink && searchQuery.length > 0 && (
+          {/* Bookmark Button */}
+          {!isMobile && canLink && searchQuery.length > 0 && (
             <div className="absolute top-2 left-2 z-10">
               <MediaBookmarkButton media={media} />
             </div>
@@ -166,7 +164,7 @@ function MediaCardContent({
           <DotList className="text-xs" content={dotListContent} />
         </div>
 
-        {/* Info Button below the image, in the bottom-right corner */}
+        {/* Info Button */}
         <div className="relative mt-2 flex justify-end">
           <button
             className={classNames(
@@ -207,15 +205,13 @@ export function MediaCard(props: MediaCardProps) {
     ? `/media/${encodeURIComponent(mediaItemToId(props.media))}`
     : "#";
   if (canLink && props.series) {
-    if (props.series.season === 0 && !props.series.episodeId) {
-      link += `/${encodeURIComponent(props.series.seasonId)}`;
-    } else {
-      link += `/${encodeURIComponent(props.series.seasonId)}/${encodeURIComponent(props.series.episodeId)}`;
-    }
+    link +=
+      props.series.season === 0 && !props.series.episodeId
+        ? `/${encodeURIComponent(props.series.seasonId)}`
+        : `/${encodeURIComponent(props.series.seasonId)}/${encodeURIComponent(props.series.episodeId)}`;
   }
 
-  if (!canLink) return <span>{content}</span>;
-  return (
+  return canLink ? (
     <Link
       to={link}
       tabIndex={-1}
@@ -226,5 +222,7 @@ export function MediaCard(props: MediaCardProps) {
     >
       {content}
     </Link>
+  ) : (
+    <span>{content}</span>
   );
 }
