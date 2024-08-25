@@ -37,7 +37,7 @@ function ButtonList(props: {
   );
 }
 
-export function PlaybackSpeed({ id }: { id: string }) {
+export function PlaybackSettingsView({ id }: { id: string }) {
   const { t } = useTranslation();
   const router = useOverlayRouter(id);
   const playbackRate = usePlayerStore((s) => s.mediaPlaying.playbackRate);
